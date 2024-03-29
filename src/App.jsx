@@ -4,43 +4,45 @@ import React, {
   useContext,
   useRef,
   useSyncExternalStore,
-  useEffect,
 } from "react";
 import { RouterProvider } from "react-router-dom";
 import { SechatGamesRouter } from "./utils/RouterSetup";
-import { AppContext, BattleshipsContext } from "./Contexts.js";
 
-function App() {
-  console.log("App Starting");
+const AppContext = createContext(null);
 
-  const appContext = useContext(AppContext);
-
-  console.log("Profile From App", ctx);
-
-  useEffect(() => {
-    const fetchUserProfile = async () => {
-      try {
-        const res = await fetch(`${process.env.API_URL}/user/get-profile`, {
-          method: "GET",
-          credentials: "include",
-        });
-        const data = await res.json();
-
-        console.log("Fetched Profile", userProfile, data);
-        setUserProfile({ ["UserProfile"]: JSON.parse(data) });
-      } catch (error) {
-        console.error("Profile Not Fetched", error);
-      }
-    };
-
-    fetchUserProfile();
+const useStoreData = () => {
+  const store = useRef({ userProfile: null, signalRClient: null });
+  const get = useCallback(() => store.current, []);
+  const subscribers = useRef(new Set());
+  const set = useCallback((value) => {
+    store.current = { ...store.current, ...value };
+    return subscribers.current.forEach((callback) => callback());
   }, []);
 
+  const subscribe = useCallback((callback) => {
+    subscribers.current.add(callback);
+    return () => subscribers.current.delete(callback);
+  }, []);
+
+  return { get, set, subscribe };
+};
+
+export const useStore = (selector) => {
+  const store = useContext(AppContext);
+  if (!store) {
+    throw "Error";
+  }
+
+  const state = useSyncExternalStore(store.subscribe, () =>
+    selector(store.get())
+  );
+  return [state, store.set];
+};
+
+export default function App() {
   return (
-    <AppContext.Provider value={appContext}>
+    <AppContext.Provider value={useStoreData()}>
       <RouterProvider router={SechatGamesRouter()} />
     </AppContext.Provider>
   );
 }
-
-export default App;
