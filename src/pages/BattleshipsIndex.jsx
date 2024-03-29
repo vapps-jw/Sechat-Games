@@ -8,7 +8,6 @@ function BattleshipsIndex() {
   return (
     <>
       <div>BattleshipsIndex</div>
-      <div>UserProfile: </div>
     </>
   );
 }

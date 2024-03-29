@@ -28,7 +28,7 @@ function GamesIndex() {
       console.log("SignalR Cleanup");
       signalRClient?.dispose().catch(console.error);
     };
-  }, [signalRClient]);
+  }, []);
   return (
     <>
       <div>GamesIndex</div>

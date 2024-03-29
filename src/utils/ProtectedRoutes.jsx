@@ -42,7 +42,9 @@ const ProtectedRoutes = () => {
     fetchUserProfile().catch(console.error);
   }, []);
 
-  console.log("Profile Updated", userProfile);
+  if (!userProfile) {
+    return null;
+  }
   return <Outlet />;
 };
 
