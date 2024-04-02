@@ -8,6 +8,11 @@ import React, {
 import { RouterProvider } from "react-router-dom";
 import { SechatGamesRouter } from "./utils/RouterSetup";
 
+export const StoreObjects = {
+  USER_PROFILE: "userProfile",
+  SIGNALR_CLIENT: "signalRClient",
+};
+
 const AppContext = createContext(null);
 
 const useStoreData = () => {
