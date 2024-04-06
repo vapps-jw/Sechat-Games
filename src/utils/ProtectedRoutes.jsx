@@ -2,7 +2,6 @@ import { Outlet } from "react-router-dom";
 import { useStore, StoreObjects } from "../App";
 import React, { useEffect } from "react";
 import * as signalR from "@microsoft/signalr";
-import { HubConnectionState } from "@microsoft/signalr";
 
 const ProtectedRoutes = () => {
   const [userProfile, setStore] = useStore(

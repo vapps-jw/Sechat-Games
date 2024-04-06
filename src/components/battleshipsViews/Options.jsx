@@ -1,7 +1,27 @@
 import React from "react";
+import { useStore, StoreObjects } from "../../App";
+import { GameView } from "../../Battleships.js";
 
 function Options() {
-  return <div>Options</div>;
+  const [gameView, setGameView] = useStore(
+    (store) => store[StoreObjects.BATTLESHIPS_GAME_VIEW]
+  );
+
+  return (
+    <>
+      <div>Options</div>
+      <button
+        className="btn"
+        onClick={() =>
+          setGameView({
+            [StoreObjects.BATTLESHIPS_GAME_VIEW]: GameView.LANDING,
+          })
+        }
+      >
+        Back
+      </button>
+    </>
+  );
 }
 
 export default Options;

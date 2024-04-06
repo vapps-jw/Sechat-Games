@@ -7,12 +7,14 @@ import React, {
 } from "react";
 import { RouterProvider } from "react-router-dom";
 import { SechatGamesRouter } from "./utils/RouterSetup";
+import { GameView } from "./Battleships.js";
 
 export const StoreObjects = {
   USER_PROFILE: "userProfile",
   SIGNALR_CONNECTION: "signalRConnection",
   SIGNALR_STATE: "signalRState",
-  BATTLESHIPS_STORE: "battleshipsStore",
+  BATTLESHIPS_GAME_STATE: "battleshipsGameState",
+  BATTLESHIPS_GAME_VIEW: "battleshipsGameView",
 };
 
 const AppContext = createContext(null);
@@ -23,6 +25,7 @@ const useStoreData = () => {
     signalRConnection: null,
     signalRState: "Not Initialized",
     battleshipsStore: null,
+    battleshipsGameView: GameView.LANDING,
   });
   const get = useCallback(() => store.current, []);
   const subscribers = useRef(new Set());
