@@ -10,13 +10,20 @@ import { SechatGamesRouter } from "./utils/RouterSetup";
 
 export const StoreObjects = {
   USER_PROFILE: "userProfile",
-  SIGNALR_CLIENT: "signalRClient",
+  SIGNALR_CONNECTION: "signalRConnection",
+  SIGNALR_STATE: "signalRState",
+  BATTLESHIPS_STORE: "battleshipsStore",
 };
 
 const AppContext = createContext(null);
 
 const useStoreData = () => {
-  const store = useRef({ userProfile: null, signalRClient: null });
+  const store = useRef({
+    userProfile: null,
+    signalRConnection: null,
+    signalRState: "Not Initialized",
+    battleshipsStore: null,
+  });
   const get = useCallback(() => store.current, []);
   const subscribers = useRef(new Set());
   const set = useCallback((value) => {

@@ -1,53 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useStore, StoreObjects } from "../App";
-import { createNewClient, SignalRClient } from "../SignalRClient";
+import { Link } from "react-router-dom";
 
 function GamesIndex() {
   const [userProfile] = useStore((store) => store[StoreObjects.USER_PROFILE]);
-  const [signalRClient, setSignalRClient] = useStore(
-    (store) => store[StoreObjects.SIGNALR_CLIENT]
+  const [signalRConnection] = useStore(
+    (store) => store[StoreObjects.SIGNALR_CONNECTION]
   );
+  const [signalRState] = useStore((store) => store[StoreObjects.SIGNALR_STATE]);
 
   useEffect(() => {
-    const initializeSignalR = async () => {
-      try {
-        if (signalRClient) {
-          return;
-        }
-        console.warn("Creating New SignalRClient");
-        const newClient = createNewClient();
-        setSignalRClient({ [StoreObjects.SIGNALR_CLIENT]: newClient });
-        await newClient.startConnection();
-      } catch (error) {
-        console.log(error);
-      }
-    };
+    console.log(signalRConnection, "- Has changed");
+  }, [signalRConnection]);
 
-    initializeSignalR().catch(console.error);
-    return () => {
-      console.log("SignalR Cleanup");
-      signalRClient?.dispose().catch(console.error);
-    };
-  }, []);
   return (
     <>
-      <div className="card w-96 bg-base-100 shadow-xl">
-        <figure>
-          <img
-            src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-            alt="Shoes"
-          />
-        </figure>
-        <div className="card-body">
-          <h2 className="card-title">Shoes!</h2>
-          <p>If a dog chews shoes whose shoes does he choose?</p>
-          <div className="card-actions justify-end">
-            <button className="btn btn-primary">Buy Now</button>
-          </div>
-        </div>
-      </div>
       <div>GamesIndex</div>
-      <div>{JSON.stringify(userProfile)}</div>
+      <div>Profile: {JSON.stringify(userProfile)}</div>
+      <div>SignalR State: {signalRState}</div>
+      <div>SignalR Connection: {signalRConnection?.connectionId}</div>
+      <Link
+        to={"/bs"}
+        className="h-[36px] bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg text-center text-sm"
+      >
+        BS
+      </Link>
     </>
   );
 }

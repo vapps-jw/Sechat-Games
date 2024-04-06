@@ -1,9 +1,20 @@
 import { Outlet } from "react-router-dom";
-import { useStore } from "../App";
+import { useStore, StoreObjects } from "../App";
 import React, { useEffect } from "react";
+import * as signalR from "@microsoft/signalr";
+import { HubConnectionState } from "@microsoft/signalr";
 
 const ProtectedRoutes = () => {
-  const [userProfile, setStore] = useStore((store) => store["userProfile"]);
+  const [userProfile, setStore] = useStore(
+    (store) => store[StoreObjects.USER_PROFILE]
+  );
+  const [signalRConnection, setSignalRConnection] = useStore(
+    (store) => store[StoreObjects.SIGNALR_CONNECTION]
+  );
+  const [signalRState, setSignalRState] = useStore(
+    (store) => store[StoreObjects.SIGNALR_STATE]
+  );
+
   console.log(
     "ProtectedRoutes Activated",
     process.env.WEB_URL_LOGIN,
@@ -39,7 +50,44 @@ const ProtectedRoutes = () => {
       }
     };
 
-    fetchUserProfile().catch(console.error);
+    const initializeSignalR = async () => {
+      const connUrl = `${process.env.API_URL}/games-hub`;
+      console.log("Creating new SignalR Connection", connUrl);
+      const connection = new signalR.HubConnectionBuilder()
+        .withUrl(connUrl)
+        .configureLogging(signalR.LogLevel.Information)
+        .withAutomaticReconnect({
+          nextRetryDelayInMilliseconds: (retryContext) => {
+            setSignalRState({
+              [StoreObjects.SIGNALR_STATE]: connection?.state,
+            });
+            return 2000;
+          },
+        })
+        .build();
+
+      connection.onreconnected(async (connectionId) => {
+        console.log("signalR Reconnecting Action", connectionId);
+        setSignalRState({
+          [StoreObjects.SIGNALR_STATE]: connection?.state,
+        });
+      });
+
+      console.log("Starting Connection", connection);
+      await connection.start();
+
+      console.log("Saving Connection to the Store", connection);
+      setSignalRConnection({
+        [StoreObjects.SIGNALR_CONNECTION]: connection,
+      });
+      setSignalRState({
+        [StoreObjects.SIGNALR_STATE]: connection?.state,
+      });
+    };
+
+    fetchUserProfile()
+      .catch(console.error)
+      .then(() => initializeSignalR().catch(console.error));
   }, []);
 
   if (!userProfile) {

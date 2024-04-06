@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { useStore, StoreObjects } from "../App";
 
 function BattleshipsIndex() {
-  useEffect(() => {
-    console.log("Use Effect");
-  }, []);
+  const [signalRClient, setSignalRClient] = useStore(
+    (store) => store[StoreObjects.SIGNALR_CONNECTION]
+  );
 
   return (
     <>
