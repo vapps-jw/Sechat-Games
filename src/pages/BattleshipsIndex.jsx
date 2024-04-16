@@ -1,9 +1,9 @@
 import React from "react";
 import { useStore, StoreObjects } from "../App";
 import { GameView } from "../Battleships.js";
-import Options from "../components/battleshipsViews/Options.jsx";
-import History from "../components/battleshipsViews/History.jsx";
-import Landing from "../components/battleshipsViews/Landing.jsx";
+import Options from "../components/battleships/Options.jsx";
+import History from "../components/battleships/History.jsx";
+import Landing from "../components/battleships/Landing.jsx";
 
 function BattleshipsIndex() {
   const [gameView] = useStore(

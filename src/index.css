@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Fonts */
+
+.bangers-default {
+  font-family: "Bangers", cursive;
+  font-size: 1.2rem;
+}
+
+/* Daisy UI Mods */
+.navbar {
+  @apply min-h-4;
+  @apply p-2;
+}

@@ -8,6 +8,7 @@ import React, {
 import { RouterProvider } from "react-router-dom";
 import { SechatGamesRouter } from "./utils/RouterSetup";
 import { GameView } from "./Battleships.js";
+import InfoBar from "./components/global/InfoBar.jsx";
 
 export const StoreObjects = {
   USER_PROFILE: "userProfile",
@@ -57,6 +58,7 @@ export const useStore = (selector) => {
 export default function App() {
   return (
     <AppContext.Provider value={useStoreData()}>
+      <InfoBar />
       <RouterProvider router={SechatGamesRouter()} />
     </AppContext.Provider>
   );

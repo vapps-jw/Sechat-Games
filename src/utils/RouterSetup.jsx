@@ -14,6 +14,10 @@ export const SechatGamesRouter = () => {
           element: <GamesIndex />,
         },
         {
+          path: "/",
+          element: <GamesIndex />,
+        },
+        {
           path: "/bs",
           element: <BattleshipsIndex />,
         },

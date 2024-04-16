@@ -5,6 +5,8 @@ import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <React.StrictMode>
-  <App />
+  <div className="flex flex-col  max-h-dvh w-full overflow-auto">
+    <App />
+  </div>
   // </React.StrictMode>,
 );

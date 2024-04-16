@@ -16,9 +16,6 @@ function GamesIndex() {
   return (
     <>
       <div>GamesIndex</div>
-      <div>Profile: {JSON.stringify(userProfile)}</div>
-      <div>SignalR State: {signalRState}</div>
-      <div>SignalR Connection: {signalRConnection?.connectionId}</div>
       <Link
         to={"/bs"}
         className="h-[36px] bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg text-center text-sm"
