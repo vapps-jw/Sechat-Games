@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useStore, StoreObjects } from "../App";
-import { Link } from "react-router-dom";
+import SemoniaCard from "../components/semonia/SemoniaCard";
 
 function GamesIndex() {
   const [userProfile] = useStore((store) => store[StoreObjects.USER_PROFILE]);
@@ -15,13 +15,9 @@ function GamesIndex() {
 
   return (
     <>
-      <div>GamesIndex</div>
-      <Link
-        to={"/bs"}
-        className="h-[36px] bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg text-center text-sm"
-      >
-        BS
-      </Link>
+      <div className="mx-4 my-2">
+        <SemoniaCard />
+      </div>
     </>
   );
 }

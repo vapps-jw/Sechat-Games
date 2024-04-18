@@ -16,6 +16,7 @@ export const StoreObjects = {
   SIGNALR_STATE: "signalRState",
   BATTLESHIPS_GAME_STATE: "battleshipsGameState",
   BATTLESHIPS_GAME_VIEW: "battleshipsGameView",
+  SEMONIA_STORE: "semoniaStore",
 };
 
 const AppContext = createContext(null);
@@ -27,6 +28,7 @@ const useStoreData = () => {
     signalRState: "Not Initialized",
     battleshipsStore: null,
     battleshipsGameView: GameView.LANDING,
+    semoniaStore: null,
   });
   const get = useCallback(() => store.current, []);
   const subscribers = useRef(new Set());

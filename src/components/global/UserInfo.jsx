@@ -6,7 +6,7 @@ function UserInfo() {
 
   return (
     <>
-      <p className="bangers-default">
+      <p className="bangers-font text-lg">
         {userProfile ? userProfile.userName : ""}
       </p>
     </>
