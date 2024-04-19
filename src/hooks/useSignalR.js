@@ -33,21 +33,18 @@ const useSignalR = () => {
       });
     });
 
-    console.log("Starting Connection", connection);
     await connection.start();
 
-    console.log("Saving Connection to the Store", connection);
     setSignalRState({
       [StoreObjects.SIGNALR_STATE]: connection?.state,
     });
 
-    console.log("Saving Connection to Store", connection);
     setSignalRConnection({
       [StoreObjects.SIGNALR_CONNECTION]: connection,
     });
   };
 
-  return [createConnection];
+  return { createConnection };
 };
 
 export default useSignalR;

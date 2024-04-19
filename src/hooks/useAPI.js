@@ -5,6 +5,57 @@ const useAPI = () => {
     (store) => store[StoreObjects.USER_PROFILE]
   );
 
+  const initializeSemonia = async () => {
+    try {
+    } catch (error) {
+      console.error("InitializeSemonia Error", error);
+    }
+  };
+
+  const joinSemonia = async () => {
+    try {
+      const res = await fetch(`${process.env.API_URL}/games/semonia/join`, {
+        method: "POST",
+        credentials: "include",
+      });
+
+      if (res.status == 405) {
+        window.location.replace(
+          `${process.env.WEB_URL_LOGIN}?url=${encodeURIComponent(
+            process.env.CALLBACK_URL
+          )}`
+        );
+        return;
+      }
+
+      return await res.json();
+    } catch (error) {
+      console.error("CheckSemoniaStatus Error", error);
+    }
+  };
+
+  const checkSemoniaStatus = async () => {
+    try {
+      const res = await fetch(`${process.env.API_URL}/games/semonia/status`, {
+        method: "GET",
+        credentials: "include",
+      });
+
+      if (res.status == 405) {
+        window.location.replace(
+          `${process.env.WEB_URL_LOGIN}?url=${encodeURIComponent(
+            process.env.CALLBACK_URL
+          )}`
+        );
+        return;
+      }
+
+      return await res.json();
+    } catch (error) {
+      console.error("CheckSemoniaStatus Error", error);
+    }
+  };
+
   const getUserProfile = async () => {
     try {
       const res = await fetch(`${process.env.API_URL}/user/get-profile`, {
@@ -33,7 +84,7 @@ const useAPI = () => {
     }
   };
 
-  return [getUserProfile];
+  return { getUserProfile, checkSemoniaStatus, initializeSemonia, joinSemonia };
 };
 
 export default useAPI;

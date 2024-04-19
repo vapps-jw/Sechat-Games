@@ -9,8 +9,8 @@ const ProtectedRoutes = () => {
     (store) => store[StoreObjects.USER_PROFILE]
   );
 
-  const [getUserProfile] = useAPI();
-  const [createConnection] = useSignalR();
+  const { getUserProfile } = useAPI();
+  const { createConnection } = useSignalR();
 
   console.log("ProtectedRoutes Activated", process.env.WEB_URL_LOGIN);
 

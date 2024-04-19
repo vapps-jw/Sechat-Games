@@ -1,5 +1,5 @@
 const IMAGES = {
-  SemoniaCardImage: "https://semonia.se-sto-1.linodeobjects.com/wip.jpg",
+  SemoniaCardImage: new URL("/images/wip.jpg", import.meta.url).href,
 };
 
 export default IMAGES;
