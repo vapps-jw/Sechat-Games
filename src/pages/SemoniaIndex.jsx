@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import useAPI from "../hooks/useAPI";
 import SemoniaGameBoard from "../components/semonia/SemoniaGameBoard";
 import SemoniaInitialization from "../components/semonia/SemoniaInitialization";
+import { useSemoniaStoreData } from "../contexts/semoniaState";
+import { SemoniaContext } from "../contexts/appContexts";
 
 function SemoniaIndex() {
   const { checkSemoniaStatus } = useAPI();
@@ -17,7 +19,11 @@ function SemoniaIndex() {
   }, []);
 
   return (
-    <> {semoniaStatus ? <SemoniaGameBoard /> : <SemoniaInitialization />}</>
+    <>
+      <SemoniaContext.Provider value={useSemoniaStoreData()}>
+        {semoniaStatus ? <SemoniaGameBoard /> : <SemoniaInitialization />}
+      </SemoniaContext.Provider>
+    </>
   );
 }
 
