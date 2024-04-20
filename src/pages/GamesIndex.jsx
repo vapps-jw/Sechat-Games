@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useStore, StoreObjects } from "../App";
+import { useStore, StoreObjects } from "../contexts/appState";
 import SemoniaCard from "../components/semonia/SemoniaCard";
 
 function GamesIndex() {

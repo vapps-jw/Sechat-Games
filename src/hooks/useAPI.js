@@ -1,4 +1,4 @@
-import { useStore, StoreObjects } from "../App";
+import { useStore, StoreObjects } from "../contexts/appState";
 
 const useAPI = () => {
   const [userProfile, setUserProfile] = useStore(

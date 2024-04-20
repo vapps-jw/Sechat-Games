@@ -1,15 +1,24 @@
 import { useCallback, useContext, useRef, useSyncExternalStore } from "react";
-import { SemoniaContext } from "../contexts/appContexts";
+import { AppContext } from "../contexts/appContexts";
+import { GameView } from "../Battleships";
 
-export const SemoniaStoreObjects = {
-  initialized: "initialized",
-  X1Y1: "X1Y1",
+export const StoreObjects = {
+  USER_PROFILE: "userProfile",
+  SIGNALR_CONNECTION: "signalRConnection",
+  SIGNALR_STATE: "signalRState",
+  BATTLESHIPS_GAME_STATE: "battleshipsGameState",
+  BATTLESHIPS_GAME_VIEW: "battleshipsGameView",
+  SEMONIA_STORE: "semoniaStore",
 };
 
-export const useSemoniaStoreData = () => {
+export const useStoreData = () => {
   const store = useRef({
-    initialized: false,
-    X1Y1: "XYtest",
+    userProfile: null,
+    signalRConnection: null,
+    signalRState: "Not Initialized",
+    battleshipsStore: null,
+    battleshipsGameView: GameView.LANDING,
+    semoniaStore: null,
   });
   const get = useCallback(() => store.current, []);
   const subscribers = useRef(new Set());
@@ -26,10 +35,10 @@ export const useSemoniaStoreData = () => {
   return { get, set, subscribe };
 };
 
-export const useSemoniaStore = (selector) => {
-  const store = useContext(SemoniaContext);
+export const useStore = (selector) => {
+  const store = useContext(AppContext);
   if (!store) {
-    throw `Store is null! >>> ${store}`;
+    throw "Error";
   }
 
   const state = useSyncExternalStore(store.subscribe, () =>

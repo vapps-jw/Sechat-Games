@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useStore, StoreObjects } from "../../App";
+import { useStore, StoreObjects } from "../../contexts/appState.js";
 
 function ConnectionStatus() {
   const [signalRState] = useStore((store) => store[StoreObjects.SIGNALR_STATE]);

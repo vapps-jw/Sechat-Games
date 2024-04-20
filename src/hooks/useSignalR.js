@@ -1,4 +1,4 @@
-import { useStore, StoreObjects } from "../App";
+import { useStore, StoreObjects } from "../contexts/appState";
 import * as signalR from "@microsoft/signalr";
 
 const useSignalR = () => {

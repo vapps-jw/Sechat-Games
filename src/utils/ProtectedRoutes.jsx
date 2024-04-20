@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import React, { useEffect } from "react";
 import useSignalR from "../hooks/useSignalR";
 import useAPI from "../hooks/useAPI";
-import { useStore, StoreObjects } from "../App";
+import { useStore, StoreObjects } from "../contexts/appState";
 
 const ProtectedRoutes = () => {
   const [userProfile, setUserProfile] = useStore(

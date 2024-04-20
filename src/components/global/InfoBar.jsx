@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useStore, StoreObjects } from "../../App";
+import { useStore, StoreObjects } from "../../contexts/appState.js";
 import ConnectionStatus from "./ConnectionStatus";
 import UserInfo from "./UserInfo";
 

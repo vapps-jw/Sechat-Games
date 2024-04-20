@@ -1,5 +1,5 @@
 import React from "react";
-import { useStore, StoreObjects } from "../App";
+import { useStore, StoreObjects } from "../contexts/appState.js";
 import { GameView } from "../Battleships.js";
 import Options from "../components/battleships/Options.jsx";
 import History from "../components/battleships/History.jsx";
