@@ -15,7 +15,7 @@ function GamesIndex() {
 
   return (
     <>
-      <div className="mx-4 my-2">
+      <div className="d-flex mx-4 my-2 flex-col">
         <SemoniaCard />
       </div>
     </>

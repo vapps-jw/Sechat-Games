@@ -12,28 +12,6 @@ const useAPI = () => {
     }
   };
 
-  const joinSemonia = async () => {
-    try {
-      const res = await fetch(`${process.env.API_URL}/games/semonia/join`, {
-        method: "POST",
-        credentials: "include",
-      });
-
-      if (res.status == 405) {
-        window.location.replace(
-          `${process.env.WEB_URL_LOGIN}?url=${encodeURIComponent(
-            process.env.CALLBACK_URL
-          )}`
-        );
-        return;
-      }
-
-      return await res.json();
-    } catch (error) {
-      console.error("CheckSemoniaStatus Error", error);
-    }
-  };
-
   const checkSemoniaStatus = async () => {
     try {
       const res = await fetch(`${process.env.API_URL}/games/semonia/status`, {
@@ -84,7 +62,7 @@ const useAPI = () => {
     }
   };
 
-  return { getUserProfile, checkSemoniaStatus, initializeSemonia, joinSemonia };
+  return { getUserProfile, checkSemoniaStatus, initializeSemonia };
 };
 
 export default useAPI;

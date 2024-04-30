@@ -2,13 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Canvas */
+
+#semoniaGameCanvas {
+  @apply border-transparent border-opacity-75 rounded;
+  /* position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%); */
+  width: 100%;
+  height: 75%;
+}
+
 /* Fonts */
 
 .bangers-font {
-  font-family: "Bangers", cursive;
+  font-family: "Bangers";
 }
 
 /* Daisy UI Mods */
+
 .navbar {
   @apply min-h-4;
   @apply p-2;

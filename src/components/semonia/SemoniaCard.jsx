@@ -1,19 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import IMAGES from "../../utils/AssetsRepo";
+import smokeCanvas from "../../animations/smokeCanvas";
 
 function SemoniaCard() {
-  const imgUrl = new URL("/images/wip.jpg", import.meta.url).href;
-  console.log("Image Path", imgUrl);
+  const canvasName = "semoniaGameCanvas";
+
+  const myImage = new Image();
+  myImage.crossOrigin = "Anonymous";
+  myImage.src = IMAGES.TestFaceImage;
+
+  useEffect(() => {
+    myImage.addEventListener("load", function () {
+      const settings = {
+        canvasId: canvasName,
+        myImage: myImage,
+        canvasWidth: window.innerWidth,
+        canvasHeight: window.innerWidth * 0.75,
+      };
+
+      smokeCanvas(settings);
+    });
+  }, []);
+
   return (
     <>
       <Link to={"/semonia"}>
-        <div
-          className={`card shadow-xl image-full bg-cover bg-center bg-['${imgUrl}']`}
-        >
-          <div className="card-body text-center bangers-font text-3xl p-12">
-            SEMONIA
-          </div>
+        <div className="flex-col">
+          <canvas id={canvasName}></canvas>
         </div>
       </Link>
     </>
