@@ -2,14 +2,14 @@ import { useCallback, useContext, useRef, useSyncExternalStore } from "react";
 import { SemoniaContext } from "../contexts/appContexts";
 
 export const SemoniaStoreObjects = {
-  initialized: "initialized",
-  X1Y1: "X1Y1",
+  INITIALIZED: "initialized",
+  SEMONIA_STATE: "semoniaState",
 };
 
 export const useSemoniaStoreData = () => {
   const store = useRef({
     initialized: false,
-    X1Y1: "XYtest",
+    semoniaState: null,
   });
   const get = useCallback(() => store.current, []);
   const subscribers = useRef(new Set());

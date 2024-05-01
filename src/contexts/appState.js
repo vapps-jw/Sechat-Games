@@ -38,7 +38,7 @@ export const useStoreData = () => {
 export const useStore = (selector) => {
   const store = useContext(AppContext);
   if (!store) {
-    throw "Error";
+    throw `Store is null! >>> ${store}`;
   }
 
   const state = useSyncExternalStore(store.subscribe, () =>

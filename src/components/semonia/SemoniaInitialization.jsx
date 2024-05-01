@@ -3,9 +3,12 @@ import {
   SemoniaStoreObjects,
   useSemoniaStore,
 } from "../../contexts/semoniaState";
+import InitializationView from "./InitializationView";
 
 function SemoniaInitialization() {
-  const [X1Y1] = useSemoniaStore((store) => store[SemoniaStoreObjects.X1Y1]);
+  const [state] = useSemoniaStore(
+    (store) => store[SemoniaStoreObjects.SEMONIA_STATE]
+  );
   const [initializationInProgress, setInitializationInProgress] =
     useState(false);
 
@@ -18,7 +21,9 @@ function SemoniaInitialization() {
       });
 
       console.log("Join Response", res);
-      return await res.json();
+      if (res.status == 200) {
+        console.log("Initialized");
+      }
     } catch (error) {
       console.error("joinSemonia Error", error);
     } finally {
@@ -26,19 +31,23 @@ function SemoniaInitialization() {
     }
   };
 
-  return (
-    <>
-      <div>SemoniaInitialization</div>
-      <div>{X1Y1}</div>
-      <button
-        onClick={joinSemonia}
-        className="btn rounded-full bangers-font text-lg"
-      >
-        Initialize
-      </button>
-      <button className="btn rounded-full bangers-font text-lg">Back</button>
-    </>
-  );
+  if (initializationInProgress) {
+    <InitializationView />;
+  } else {
+    return (
+      <>
+        <div>SemoniaInitialization</div>
+        <div>{JSON.stringify(state)}</div>
+        <button
+          onClick={joinSemonia}
+          className="btn rounded-full bangers-font text-lg"
+        >
+          Initialize
+        </button>
+        <button className="btn rounded-full bangers-font text-lg">Back</button>
+      </>
+    );
+  }
 }
 
 export default SemoniaInitialization;

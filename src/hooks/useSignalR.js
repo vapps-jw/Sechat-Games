@@ -1,5 +1,10 @@
 import { useStore, StoreObjects } from "../contexts/appState";
 import * as signalR from "@microsoft/signalr";
+import { SemoniaStoreObjects, useSemoniaStore } from "../contexts/semoniaState";
+
+export const SignalRHubMethods = {
+  SemoniaStateUpdate: "SemoniaStateUpdate",
+};
 
 const useSignalR = () => {
   const [signalRConnection, setSignalRConnection] = useStore(
@@ -7,6 +12,9 @@ const useSignalR = () => {
   );
   const [signalRState, setSignalRState] = useStore(
     (store) => store[StoreObjects.SIGNALR_STATE]
+  );
+  const [semonia, setSemonia] = useSemoniaStore(
+    (store) => store[SemoniaStoreObjects.SEMONIA_STATE]
   );
 
   const createConnection = async () => {
@@ -25,6 +33,13 @@ const useSignalR = () => {
         },
       })
       .build();
+
+    connection.on(SignalRHubMethods.SemoniaStateUpdate, (data) => {
+      console.log("Semonia State Receiced:", data);
+      setSemonia({
+        [SemoniaStoreObjects.SEMONIA_STATE]: data,
+      });
+    });
 
     connection.onreconnected(async (connectionId) => {
       console.log("signalR Reconnecting Action", connectionId);

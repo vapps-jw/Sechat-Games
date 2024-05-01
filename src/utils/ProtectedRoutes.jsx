@@ -12,8 +12,6 @@ const ProtectedRoutes = () => {
   const { getUserProfile } = useAPI();
   const { createConnection } = useSignalR();
 
-  console.log("ProtectedRoutes Activated", process.env.WEB_URL_LOGIN);
-
   useEffect(() => {
     getUserProfile()
       .catch(console.error)
