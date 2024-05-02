@@ -6,8 +6,8 @@ import {
 import InitializationView from "./InitializationView";
 
 function SemoniaInitialization() {
-  const [state] = useSemoniaStore(
-    (store) => store[SemoniaStoreObjects.SEMONIA_STATE]
+  const [semoniaState, setSemoniaState] = useSemoniaStore(
+    (store) => store[SemoniaStoreObjects.INITIALIZED]
   );
   const [initializationInProgress, setInitializationInProgress] =
     useState(false);
@@ -22,7 +22,10 @@ function SemoniaInitialization() {
 
       console.log("Join Response", res);
       if (res.status == 200) {
-        console.log("Initialized");
+        setSemoniaState({
+          [SemoniaStoreObjects.INITIALIZED]: true,
+        });
+        console.log("Semonia Initialized", semoniaState);
       }
     } catch (error) {
       console.error("joinSemonia Error", error);
@@ -37,7 +40,6 @@ function SemoniaInitialization() {
     return (
       <>
         <div>SemoniaInitialization</div>
-        <div>{JSON.stringify(state)}</div>
         <button
           onClick={joinSemonia}
           className="btn rounded-full bangers-font text-lg"

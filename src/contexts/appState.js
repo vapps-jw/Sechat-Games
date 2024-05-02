@@ -1,13 +1,10 @@
 import { useCallback, useContext, useRef, useSyncExternalStore } from "react";
 import { AppContext } from "../contexts/appContexts";
-import { GameView } from "../Battleships";
 
 export const StoreObjects = {
   USER_PROFILE: "userProfile",
   SIGNALR_CONNECTION: "signalRConnection",
   SIGNALR_STATE: "signalRState",
-  BATTLESHIPS_GAME_STATE: "battleshipsGameState",
-  BATTLESHIPS_GAME_VIEW: "battleshipsGameView",
   SEMONIA_STORE: "semoniaStore",
 };
 
@@ -16,8 +13,6 @@ export const useStoreData = () => {
     userProfile: null,
     signalRConnection: null,
     signalRState: "Not Initialized",
-    battleshipsStore: null,
-    battleshipsGameView: GameView.LANDING,
     semoniaStore: null,
   });
   const get = useCallback(() => store.current, []);

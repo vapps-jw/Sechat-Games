@@ -3,6 +3,8 @@ import {
   SemoniaStoreObjects,
   useSemoniaStore,
 } from "../../contexts/semoniaState";
+import SemoniaBlocksContainer from "./SemoniaBlocksContainer";
+import SemoniaInfoBar from "./SemoniaInfoBar";
 
 function SemoniaGameBoard() {
   const [state, setState] = useSemoniaStore(
@@ -11,8 +13,8 @@ function SemoniaGameBoard() {
 
   return (
     <>
-      <div>SemoniaGameBoard</div>
-      <div>State: {JSON.stringify(state)}</div>
+      <SemoniaInfoBar />
+      <SemoniaBlocksContainer />
     </>
   );
 }

@@ -35,7 +35,7 @@ const useSignalR = () => {
       .build();
 
     connection.on(SignalRHubMethods.SemoniaStateUpdate, (data) => {
-      console.log("Semonia State Receiced:", data);
+      console.log("Semonia State Receiced");
       setSemonia({
         [SemoniaStoreObjects.SEMONIA_STATE]: data,
       });

@@ -2,20 +2,26 @@ import React, { useEffect, useState } from "react";
 import useAPI from "../hooks/useAPI";
 import SemoniaGameBoard from "../components/semonia/SemoniaGameBoard";
 import SemoniaInitialization from "../components/semonia/SemoniaInitialization";
+import { SemoniaStoreObjects, useSemoniaStore } from "../contexts/semoniaState";
 
 function SemoniaIndex() {
   const { checkSemoniaStatus } = useAPI();
-  const [semoniaStatus, setSemoniaStatus] = useState(false);
+  const [semoniaState, setSemoniaState] = useSemoniaStore(
+    (store) => store[SemoniaStoreObjects.INITIALIZED]
+  );
 
   useEffect(() => {
     checkSemoniaStatus()
       .catch(console.error)
       .then((res) => {
-        setSemoniaStatus(res);
+        console.log("API Semonia  status check", res);
+        setSemoniaState({
+          [SemoniaStoreObjects.INITIALIZED]: res,
+        });
       });
   }, []);
 
-  if (semoniaStatus) {
+  if (semoniaState) {
     return <SemoniaGameBoard />;
   } else {
     return <SemoniaInitialization />;

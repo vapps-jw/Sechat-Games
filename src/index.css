@@ -14,6 +14,37 @@
   height: 75%;
 }
 
+/* Semonia Grid */
+
+.semonia-block {
+  width: 10dvh;
+  height: 10dvh;
+}
+
+.semonia-block-container {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-gap: 1px;
+}
+
+/* .semonia-block-container div {
+  aspect-ratio: 1 / 1;
+
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+.semonia-block-container-item {
+  aspect-ratio: 1 / 1;
+
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Fonts */
 
 .bangers-font {
