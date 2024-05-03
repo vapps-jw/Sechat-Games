@@ -5,7 +5,6 @@ export const StoreObjects = {
   USER_PROFILE: "userProfile",
   SIGNALR_CONNECTION: "signalRConnection",
   SIGNALR_STATE: "signalRState",
-  SEMONIA_STORE: "semoniaStore",
 };
 
 export const useStoreData = () => {
@@ -13,7 +12,6 @@ export const useStoreData = () => {
     userProfile: null,
     signalRConnection: null,
     signalRState: "Not Initialized",
-    semoniaStore: null,
   });
   const get = useCallback(() => store.current, []);
   const subscribers = useRef(new Set());

@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+.app {
+  overflow: hidden;
+  position: fixed;
+}
+
 /* Canvas */
 
 #semoniaGameCanvas {
@@ -16,25 +21,12 @@
 
 /* Semonia Grid */
 
-.semonia-block {
-  width: 10dvh;
-  height: 10dvh;
-}
-
 .semonia-block-container {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-gap: 1px;
+  overflow: hidden;
 }
-
-/* .semonia-block-container div {
-  aspect-ratio: 1 / 1;
-
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
 
 .semonia-block-container-item {
   aspect-ratio: 1 / 1;
@@ -43,6 +35,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.block-canvas {
+  image-rendering: pixelated;
+  position: absolute;
 }
 
 /* Fonts */

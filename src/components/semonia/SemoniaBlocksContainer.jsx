@@ -1,16 +1,9 @@
 import React, { useState } from "react";
-import {
-  SemoniaStoreObjects,
-  useSemoniaStore,
-} from "../../contexts/semoniaState";
 import SemoniaBlock from "./SemoniaBlock";
 import BlockDetailsModal from "./BlockDetailsModal";
+import { v4 as uuidv4 } from "uuid";
 
 function SemoniaBlocksContaincer() {
-  const [state, setState] = useSemoniaStore(
-    (store) => store[SemoniaStoreObjects.SEMONIA_STATE]
-  );
-
   const [detailsOpen, setDetailsOpen] = useState(false);
   const [detailedBlock, setDetailedBlock] = useState(null);
 
@@ -20,15 +13,25 @@ function SemoniaBlocksContaincer() {
     setDetailsOpen(true);
   }
 
-  if (state) {
+  if (true) {
     return (
       <>
-        <div className="semonia-block-container">
-          {state.blocks.map((b, i) => (
-            <div onClick={() => openDetails(b)}>
-              <SemoniaBlock key={i} data={b} />
-            </div>
-          ))}
+        <div id={uuidv4()} className="semonia-block-container">
+          {Array(49)
+            .fill({})
+            .map((b, i) => {
+              const uniqueKey = uuidv4();
+              return (
+                <div
+                  className="semonia-block-container-item"
+                  id={uniqueKey}
+                  key={uniqueKey}
+                  onClick={() => openDetails(b)}
+                >
+                  <SemoniaBlock parentId={uniqueKey} displayBlockOrder={i} />
+                </div>
+              );
+            })}
         </div>
         <BlockDetailsModal
           open={detailsOpen}

@@ -7,9 +7,10 @@ import SemoniaBlocksContainer from "./SemoniaBlocksContainer";
 import SemoniaInfoBar from "./SemoniaInfoBar";
 
 function SemoniaGameBoard() {
-  const [state, setState] = useSemoniaStore(
-    (store) => store[SemoniaStoreObjects.SEMONIA_STATE]
-  );
+  // todo: context not for block infos
+  // const [state, setState] = useSemoniaStore(
+  //   (store) => store[SemoniaStoreObjects.SEMONIA_STATE]
+  // );
 
   return (
     <>
