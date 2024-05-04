@@ -14,7 +14,6 @@ function SemoniaIndex() {
     checkSemoniaStatus()
       .catch(console.error)
       .then((res) => {
-        console.log("API Semonia  status check", res);
         setSemoniaState({
           [SemoniaStoreObjects.INITIALIZED]: res,
         });
@@ -22,7 +21,12 @@ function SemoniaIndex() {
   }, []);
 
   if (semoniaState) {
-    return <SemoniaGameBoard />;
+    return (
+      <>
+        <div>{semoniaState}</div>
+        <SemoniaGameBoard />;
+      </>
+    );
   } else {
     return <SemoniaInitialization />;
   }

@@ -11,8 +11,8 @@ import {
 function SemoniaBlock(props) {
   const canvasName = uuidv4();
 
-  const [state, setState] = useSemoniaStore(
-    (store) => store[SemoniaStoreObjects.SEMONIA_STATE]
+  const [blockState, setBlockState] = useSemoniaStore(
+    (store) => store[`block-${props.displayBlockOrder}`]
   );
 
   // todo: split contexts per block
@@ -35,6 +35,7 @@ function SemoniaBlock(props) {
 
   return (
     <>
+      {/* <div>{JSON.stringify(blockState.terrain)}</div> */}
       <canvas className="block-canvas" id={canvasName}></canvas>
     </>
   );

@@ -26,9 +26,12 @@ function SemoniaBlocksContaincer() {
                   className="semonia-block-container-item"
                   id={uniqueKey}
                   key={uniqueKey}
-                  onClick={() => openDetails(b)}
                 >
-                  <SemoniaBlock parentId={uniqueKey} displayBlockOrder={i} />
+                  <SemoniaBlock
+                    parentId={uniqueKey}
+                    displayBlockOrder={i}
+                    openDetails={openDetails}
+                  />
                 </div>
               );
             })}
