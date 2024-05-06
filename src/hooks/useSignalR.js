@@ -1,15 +1,12 @@
 import { useStore, StoreObjects } from "../contexts/appState";
 import * as signalR from "@microsoft/signalr";
-import { SemoniaStoreObjects, useSemoniaStore } from "../contexts/semoniaState";
-import { useContext } from "react";
-import { SemoniaContext } from "../contexts/appContexts";
-import React, { useState, useEffect } from "react";
+import { useSemoniaStore } from "../contexts/semoniaState";
 
 export const SignalRHubMethods = {
   SemoniaStateUpdate: "SemoniaStateUpdate",
 };
 
-var prevState = null;
+var prevBlocks = {};
 
 const useSignalR = () => {
   const [signalRConnection, setSignalRConnection] = useStore(
@@ -39,14 +36,31 @@ const useSignalR = () => {
       .build();
 
     connection.on(SignalRHubMethods.SemoniaStateUpdate, (data) => {
-      console.log("Semonia State Receiced", data);
-      console.log("Prev State", prevState);
+      console.log("Semonia State Receiced");
+      // console.log("Prev State", prevBlocks);
 
       data.blocks.forEach((block) => {
         const blockProp = `block-${block.displayOrder}`;
-        setSemonia({
-          [blockProp]: block,
-        });
+        if (!Object.keys(prevBlocks).some((pbk) => pbk === blockProp)) {
+          console.log("Initializing block", block);
+          prevBlocks[blockProp] = block;
+          setSemonia({
+            [blockProp]: block,
+          });
+          return;
+        }
+        const prevBlockProp = prevBlocks[blockProp];
+        if (
+          !(
+            prevBlockProp.id === block.id &&
+            prevBlockProp.displayOrder === block.displayOrder
+          )
+        ) {
+          console.log("Updating block", block, prevBlockProp);
+          setSemonia({
+            [blockProp]: block,
+          });
+        }
       });
       setSemonia({
         ["currentPositionX"]: data.currentPositionX,
@@ -57,7 +71,6 @@ const useSignalR = () => {
       setSemonia({
         ["statePulled"]: true,
       });
-      prevState = data;
     });
 
     connection.onreconnected(async (connectionId) => {

@@ -36,7 +36,11 @@ function SemoniaBlock(props) {
   return (
     <>
       {/* <div>{JSON.stringify(blockState.terrain)}</div> */}
-      <canvas className="block-canvas" id={canvasName}></canvas>
+      <canvas
+        onClick={() => props.openDetails(blockState)}
+        className="block-canvas"
+        id={canvasName}
+      ></canvas>
     </>
   );
 }

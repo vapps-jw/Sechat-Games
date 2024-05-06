@@ -1,11 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SemoniaBlock from "./SemoniaBlock";
 import BlockDetailsModal from "./BlockDetailsModal";
 import { v4 as uuidv4 } from "uuid";
+import {
+  SemoniaStoreObjects,
+  useSemoniaStore,
+} from "../../contexts/semoniaState";
 
 function SemoniaBlocksContaincer() {
+  const [windowSize, setWindowSize] = useState(null);
+
   const [detailsOpen, setDetailsOpen] = useState(false);
   const [detailedBlock, setDetailedBlock] = useState(null);
+  const [statePulled, setStatePulled] = useSemoniaStore(
+    (store) => store[SemoniaStoreObjects.STATE_PULLED]
+  );
 
   function openDetails(block) {
     console.log("Open Details Clicked", block);
@@ -13,7 +22,18 @@ function SemoniaBlocksContaincer() {
     setDetailsOpen(true);
   }
 
-  if (true) {
+  const resize = () => {
+    setWindowSize({
+      h: window.innerHeight,
+      w: window.innerWidth,
+    });
+  };
+  useEffect(() => {
+    window.addEventListener("resize", resize);
+    return () => window.removeEventListener("resize", resize);
+  }, []);
+
+  if (statePulled) {
     return (
       <>
         <div id={uuidv4()} className="semonia-block-container">

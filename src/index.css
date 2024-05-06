@@ -22,10 +22,15 @@
 /* Semonia Grid */
 
 .semonia-block-container {
+  /* @apply ml-20 mt-10; */
+}
+.semonia-block-container {
+  /* max-width: 70%; */
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-gap: 1px;
   overflow: hidden;
+  /* transform: rotateX(40deg) rotateZ(45deg); */
 }
 
 .semonia-block-container-item {

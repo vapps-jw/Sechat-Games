@@ -4,6 +4,7 @@ import { SemoniaContext } from "../contexts/appContexts";
 export const SemoniaStoreObjects = {
   INITIALIZED: "initialized",
   SEMONIA_STATE: "semoniaState",
+  STATE_PULLED: "statePulled",
 };
 
 const initializeState = () => {
