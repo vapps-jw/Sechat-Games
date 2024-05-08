@@ -8,7 +8,7 @@ function SemoniaCard() {
 
   const myImage = new Image();
   myImage.crossOrigin = "Anonymous";
-  myImage.src = IMAGES.TestFaceImage;
+  myImage.src = IMAGES.TestImage;
 
   useEffect(() => {
     myImage.addEventListener("load", function () {

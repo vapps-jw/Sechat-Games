@@ -42,7 +42,6 @@ const useSignalR = () => {
       data.blocks.forEach((block) => {
         const blockProp = `block-${block.displayOrder}`;
         if (!Object.keys(prevBlocks).some((pbk) => pbk === blockProp)) {
-          console.log("Initializing block", block);
           prevBlocks[blockProp] = block;
           setSemonia({
             [blockProp]: block,

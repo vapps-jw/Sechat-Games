@@ -19,7 +19,11 @@ const ProtectedRoutes = () => {
   }, []);
 
   if (!userProfile) {
-    return null;
+    return (
+      <>
+        <div>Issue</div>
+      </>
+    );
   }
   return <Outlet />;
 };

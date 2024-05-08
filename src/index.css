@@ -2,9 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-.app {
+html,
+body {
   overflow: hidden;
+}
+.app {
   position: fixed;
+}
+
+/* Border Animations */
+
+@keyframes border-pulse {
+  50% {
+    border-color: rgba(255, 255, 255, 0);
+  }
+}
+
+.owned-block {
+  border: 2px solid red;
+  animation: border-pulse 2s infinite;
 }
 
 /* Canvas */
@@ -22,20 +38,17 @@
 /* Semonia Grid */
 
 .semonia-block-container {
-  /* @apply ml-20 mt-10; */
-}
-.semonia-block-container {
-  /* max-width: 70%; */
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 800px;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  grid-gap: 1px;
-  overflow: hidden;
+  grid-gap: 2px;
   /* transform: rotateX(40deg) rotateZ(45deg); */
 }
 
 .semonia-block-container-item {
   aspect-ratio: 1 / 1;
-
   color: white;
   display: flex;
   justify-content: center;

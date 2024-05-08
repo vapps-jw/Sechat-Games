@@ -5,17 +5,30 @@ import {
 } from "../../contexts/semoniaState";
 import SemoniaBlocksContainer from "./SemoniaBlocksContainer";
 import SemoniaInfoBar from "./SemoniaInfoBar";
+import BottomDetailsPanel from "./BottomDetailsPanel";
+import BlockContainerLoading from "./BlockContainerLoading";
 
 function SemoniaGameBoard() {
-  // todo: context not for block infos
-  // const [state, setState] = useSemoniaStore(
-  //   (store) => store[SemoniaStoreObjects.SEMONIA_STATE]
-  // );
+  const [statePulled, setStatePulled] = useSemoniaStore(
+    (store) => store[SemoniaStoreObjects.STATE_PULLED]
+  );
 
   return (
     <>
-      <SemoniaInfoBar />
-      <SemoniaBlocksContainer />
+      <div className="h-10 flex justify-center">
+        <SemoniaInfoBar />
+      </div>
+      {statePulled ? (
+        <SemoniaBlocksContainer />
+      ) : (
+        <div className="flex justify-center">
+          <BlockContainerLoading />
+        </div>
+      )}
+
+      <div className="flex justify-center">
+        <BottomDetailsPanel />
+      </div>
     </>
   );
 }

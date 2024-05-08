@@ -23,7 +23,6 @@ function SemoniaIndex() {
   if (semoniaState) {
     return (
       <>
-        <div>{semoniaState}</div>
         <SemoniaGameBoard />
       </>
     );
