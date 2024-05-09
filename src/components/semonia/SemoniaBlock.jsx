@@ -73,6 +73,7 @@ function SemoniaBlock(props) {
           <h3 className="font-bold text-lg">{block?.id}</h3>
           <img src={bgImage()}></img>
           <p>Terrain: {block?.terrain}</p>
+          <p>Population: {block?.population}</p>
           <p className="py-4">Press ESC key or click on ✕ button to close</p>
           <button className="btn " onClick={() => detialsClicked()}>
             testButton

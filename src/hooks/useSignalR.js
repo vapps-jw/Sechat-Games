@@ -8,6 +8,11 @@ export const SignalRHubMethods = {
 
 var prevBlocks = {};
 
+const matches = (obj, source) =>
+  Object.keys(source).every(
+    (key) => obj.hasOwnProperty(key) && obj[key] === source[key]
+  );
+
 const useSignalR = () => {
   const [signalRConnection, setSignalRConnection] = useStore(
     (store) => store[StoreObjects.SIGNALR_CONNECTION]
@@ -36,9 +41,7 @@ const useSignalR = () => {
       .build();
 
     connection.on(SignalRHubMethods.SemoniaStateUpdate, (data) => {
-      console.log("Semonia State Receiced");
       // console.log("Prev State", prevBlocks);
-
       data.blocks.forEach((block) => {
         const blockProp = `block-${block.displayOrder}`;
         if (!Object.keys(prevBlocks).some((pbk) => pbk === blockProp)) {
@@ -51,16 +54,23 @@ const useSignalR = () => {
         const prevBlockProp = prevBlocks[blockProp];
         if (
           !(
-            prevBlockProp.id === block.id &&
-            prevBlockProp.displayOrder === block.displayOrder
+            prevBlockProp?.id === block.id &&
+            prevBlockProp?.displayOrder === block.displayOrder
           )
         ) {
-          console.log("Updating block", block, prevBlockProp);
+          setSemonia({
+            [blockProp]: block,
+          });
+          return;
+        }
+
+        if (prevBlockProp?.id === block.id && !matches(prevBlockProp, block)) {
           setSemonia({
             [blockProp]: block,
           });
         }
       });
+
       setSemonia({
         ["currentPositionX"]: data.currentPositionX,
       });
